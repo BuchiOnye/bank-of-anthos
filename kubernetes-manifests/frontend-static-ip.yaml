@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+    tier: web
+    application: bank-of-anthos
+    team: frontend
+    app.kubernetes.io/part-of: bank-of-anthos
+    app.kubernetes.io/version: v0.6.7
+    app.kubernetes.io/name: frontend
+  annotations:
+    networking.gke.io/load-balancer-ip-addresses: "bank-of-anthos-ip"  # Use the reserved IP address name
+spec:
+  type: LoadBalancer
+  selector:
+    app: frontend
+    tier: web
+    application: bank-of-anthos
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
